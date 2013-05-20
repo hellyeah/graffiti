@@ -38,7 +38,7 @@
            NSError *error) {
              if (!error) {
                  NSLog(@"Workin");
-                 
+                 self.posts = [NSArray arrayWithObjects: user.id, user.name, user.birthday, nil];
                  
                  userProfile[@"facebookId"] = user.id;
                  userProfile[@"name"] = user.name;
@@ -83,8 +83,6 @@
         }];
      
     }
-     
-   
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -92,7 +90,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.posts = [NSArray arrayWithObjects: @"blah", @"blah1", @"blah2", nil];
+    //self.posts = [NSArray arrayWithObjects: blah, blah1, blah2, nil];
     //NSLog([userProfile[@"name"] absoluteString]);
 }
 

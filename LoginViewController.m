@@ -59,7 +59,6 @@
     NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location", @"email"];
     
     // Login PFUser using Facebook
-    
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
         //[_activityIndicator stopAnimating]; // Hide loading indicator
         NSLog(@"success");
@@ -71,13 +70,20 @@
             }
         } else if (user.isNew) {
             NSLog(@"User with facebook signed up and logged in!");
-            [self performSegueWithIdentifier: @"afterLogin" sender: self];
+            //[self performSegueWithIdentifier: @"afterLogin" sender: self];
         } else {
             NSLog(@"User with facebook logged in!");
-            [self performSegueWithIdentifier: @"afterLogin" sender: self];
+            //[self performSegueWithIdentifier: @"afterLogin" sender: self];
         }
     }];
-     
+    
+    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
+        // To-do, show logged in view
+        [self performSegueWithIdentifier: @"afterLogin" sender: self];
+    }
+    else {
+        NSLog(@"grr");
+    }
     
 }
 
