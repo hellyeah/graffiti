@@ -29,14 +29,18 @@
                                     <action selector="loginButtonTouchHandler:" destination="QtX-vp-AL5" eventType="touchUpInside" id="Q5q-yP-K4H"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="c0b-hA-C2c"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="05E-uZ-Ubt" firstAttribute="centerX" secondItem="knv-bb-4FD" secondAttribute="centerX" type="default" id="EnD-be-jIF"/>
+                            <constraint firstItem="c0b-hA-C2c" firstAttribute="centerX" secondItem="knv-bb-4FD" secondAttribute="centerX" type="default" id="0oC-fF-TxH"/>
+                            <constraint firstItem="c0b-hA-C2c" firstAttribute="centerX" secondItem="05E-uZ-Ubt" secondAttribute="centerX" type="default" id="8vN-4u-5o7"/>
+                            <constraint firstAttribute="bottom" secondItem="c0b-hA-C2c" secondAttribute="bottom" constant="115" id="keE-Ow-mCO"/>
                             <constraint firstItem="05E-uZ-Ubt" firstAttribute="top" secondItem="knv-bb-4FD" secondAttribute="top" constant="249" id="xb2-Hg-klk"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="c0b-hA-C2c" id="fSN-Ml-jRQ"/>
                         <segue destination="x3Z-Tk-mrr" kind="modal" identifier="afterLogin" id="mV6-Pr-7GO"/>
                     </connections>
                 </viewController>
@@ -74,6 +78,21 @@
             <point key="canvasLocation" x="559" y="-118"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginButtonTouchHandler:"/>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+            </relationships>
+        </class>
+        <class className="MainStreamTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainStreamTableViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

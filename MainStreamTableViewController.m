@@ -27,9 +27,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //NSMutableString *myMutableString = [NSMutableString stringWithFormat:@"test"];
+    self.posts = [NSMutableArray array];
+    
+    [self.posts addObject:@"blah"];
+    [self.posts addObject:@"blah2"];
+    //NSArray *PostsArray = [
 
-    NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:5];
+
     
     if (FBSession.activeSession.isOpen) {
         [[FBRequest requestForMe] startWithCompletionHandler:
@@ -38,7 +42,7 @@
            NSError *error) {
              if (!error) {
                  NSLog(@"Workin");
-                 self.posts = [NSArray arrayWithObjects: user.id, user.name, user.birthday, nil];
+                 NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:5];
                  
                  userProfile[@"facebookId"] = user.id;
                  userProfile[@"name"] = user.name;
@@ -66,6 +70,7 @@
                 // Create a list of friends' Facebook IDs
                 for (NSDictionary *friendObject in friendObjects) {
                     [friendIds addObject:[friendObject objectForKey:@"id"]];
+                    [self.posts addObject:[friendObject objectForKey:@"id"]];
                 }
                 
                 [[PFUser currentUser] setObject:friendIds forKey:@"friends"];
@@ -89,8 +94,12 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //NSArray *PostsArray =
     
-    //self.posts = [NSArray arrayWithObjects: blah, blah1, blah2, nil];
+    /*for (NSObject *Post in PostsArray) {
+        [self.posts addObject:Post];
+    }*/
+    
     //NSLog([userProfile[@"name"] absoluteString]);
 }
 

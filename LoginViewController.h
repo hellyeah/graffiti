@@ -14,5 +14,6 @@
 
 - (IBAction)loginButtonTouchHandler:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
