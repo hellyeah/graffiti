@@ -27,7 +27,6 @@
                                 </state>
                                 <connections>
                                     <action selector="loginButtonTouchHandler:" destination="QtX-vp-AL5" eventType="touchUpInside" id="Q5q-yP-K4H"/>
-                                    <segue destination="x3Z-Tk-mrr" kind="modal" identifier="afterLogin" id="hzY-Ew-EiZ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -37,6 +36,9 @@
                             <constraint firstItem="05E-uZ-Ubt" firstAttribute="top" secondItem="knv-bb-4FD" secondAttribute="top" constant="249" id="xb2-Hg-klk"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="x3Z-Tk-mrr" kind="modal" identifier="afterLogin" id="mV6-Pr-7GO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmw-hv-ceE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

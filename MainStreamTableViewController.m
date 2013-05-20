@@ -28,6 +28,7 @@
 {
     [super viewDidLoad];
     //NSMutableString *myMutableString = [NSMutableString stringWithFormat:@"test"];
+
     NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:5];
     
     if (FBSession.activeSession.isOpen) {
@@ -80,7 +81,10 @@
                 //NSArray *friendUsers = [friendQuery findObjects];
             }
         }];
+     
     }
+     
+   
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

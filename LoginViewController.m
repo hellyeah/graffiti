@@ -55,9 +55,11 @@
 - (IBAction)loginButtonTouchHandler:(id)sender  {
     
     // The permissions requested from the user
+    
     NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location", @"email"];
     
     // Login PFUser using Facebook
+    
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
         //[_activityIndicator stopAnimating]; // Hide loading indicator
         NSLog(@"success");
@@ -69,14 +71,13 @@
             }
         } else if (user.isNew) {
             NSLog(@"User with facebook signed up and logged in!");
-            //[self.navigationController pushViewController:[[MainStreamTableViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:YES];
+            [self performSegueWithIdentifier: @"afterLogin" sender: self];
         } else {
             NSLog(@"User with facebook logged in!");
-            //[self.navigationController pushViewController:[[UserDetailsViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:YES];
+            [self performSegueWithIdentifier: @"afterLogin" sender: self];
         }
-        
-        [self performSegueWithIdentifier: @"afterLogin" sender: self];
     }];
+     
     
 }
 
