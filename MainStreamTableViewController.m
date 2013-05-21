@@ -78,16 +78,23 @@
                 
                 // Construct a PFUser query that will find friends whose facebook ids
                 // are contained in the current user's friend list.
-                //PFQuery *friendQuery = [PFUser query];
-                //[friendQuery whereKey:@"fbId" containedIn:friendIds];
+                PFQuery *friendQuery = [PFQuery queryWithClassName:@"Post"];
+                [friendQuery whereKey:@"postedAboutID" containedIn:friendIds];
                 
-                // findObjects will return a list of PFUsers that are friends
-                // with the current user
-                //NSArray *friendUsers = [friendQuery findObjects];
+                // findObjects will return a list of posts about friends
+                // of the current user
+                // ** NEED TO LOOP THROUGH ENTIRE friendPosts NSArray HERE **
+                NSArray *friendPosts = [friendQuery findObjects];
+                NSString *onePost = [friendPosts[0] objectForKey:@"text"];
+                NSLog(@"%@", onePost);
+                // ** NEED TO ADD OBJECTS TO self.posts HERE **
+                //[self.posts addObject:onePost];
+                //[self.posts addObject:@"blah4"];
             }
         }];
      
     }
+    [self.posts addObject:@"blah3"];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
