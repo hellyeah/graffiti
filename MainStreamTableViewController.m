@@ -29,11 +29,9 @@
     [super viewDidLoad];
     self.posts = [NSMutableArray array];
     
-    [self.posts addObject:@"blah"];
-    [self.posts addObject:@"blah2"];
-    //NSArray *PostsArray = [
-
-
+    //Just another example of nsmutablearray being implemented
+    //NSMutableArray *blah1 = [[NSMutableArray alloc] init];
+    //[blah1 addObject:@"blahblahblah"];
     
     if (FBSession.activeSession.isOpen) {
         [[FBRequest requestForMe] startWithCompletionHandler:
@@ -70,7 +68,6 @@
                 // Create a list of friends' Facebook IDs
                 for (NSDictionary *friendObject in friendObjects) {
                     [friendIds addObject:[friendObject objectForKey:@"id"]];
-                    [self.posts addObject:[friendObject objectForKey:@"id"]];
                 }
                 
                 [[PFUser currentUser] setObject:friendIds forKey:@"friends"];
@@ -83,31 +80,26 @@
                 
                 // findObjects will return a list of posts about friends
                 // of the current user
-                // ** NEED TO LOOP THROUGH ENTIRE friendPosts NSArray HERE **
+                
+                //LOOP THROUGH ENTIRE friendPosts NSArray HERE and add posts to self.posts
                 NSArray *friendPosts = [friendQuery findObjects];
-                NSString *onePost = [friendPosts[0] objectForKey:@"text"];
-                NSLog(@"%@", onePost);
-                // ** NEED TO ADD OBJECTS TO self.posts HERE **
-                //[self.posts addObject:onePost];
-                //[self.posts addObject:@"blah4"];
+                for (NSDictionary *onePost in friendPosts) {
+                    NSLog(@"%@", [onePost objectForKey:@"text"]);
+                    [self.posts addObject:[onePost objectForKey:@"text"]];
+                }
+                
+                //Reload table so it all shows up
+                [self.tableView reloadData];
             }
         }];
      
     }
-    [self.posts addObject:@"blah3"];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    //NSArray *PostsArray =
-    
-    /*for (NSObject *Post in PostsArray) {
-        [self.posts addObject:Post];
-    }*/
-    
-    //NSLog([userProfile[@"name"] absoluteString]);
 }
 
 - (void)didReceiveMemoryWarning
