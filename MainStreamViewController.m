@@ -34,6 +34,8 @@
     //[self.tableViewController setTableViewController:[self tableView]]
     //[self.view addSubview:tableViewController.tableView];
     self.posts = [NSMutableArray array];
+    NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
+    
     
     //Just another example of nsmutablearray being implemented
     //NSMutableArray *blah1 = [[NSMutableArray alloc] init];
@@ -70,11 +72,19 @@
             if (!error) {
                 // result will contain an array with your user's friends in the "data" key
                 NSArray *friendObjects = [result objectForKey:@"data"];
+                //[userInfo setObject:friendObjects forKey:@"friendData"];
+                //NSLog(@"%@", [[[userInfo objectForKey:@"friendData"] objectAtIndex:1] objectForKey:@"id"]);
                 NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
-                // Create a list of friends' Facebook IDs
+                NSMutableArray *facebookFriends = [[NSMutableArray alloc] initWithCapacity:friendObjects.count];
+                // Create a list of friends' Facebook IDs + 
                 for (NSDictionary *friendObject in friendObjects) {
                     [friendIds addObject:[friendObject objectForKey:@"id"]];
+                    [facebookFriends addObject:[NSMutableArray arrayWithObjects:[friendObject objectForKey:@"id"],[friendObject objectForKey:@"name"],nil]];
+                    //[userInfo setObject:friendObject forKey:@"friend"];
                 }
+                [userInfo setObject:facebookFriends forKey:@"friendData"];
+                //Saving the userInfo to persistent storage
+                [userInfo synchronize];
                 
                 [[PFUser currentUser] setObject:friendIds forKey:@"friends"];
                 [[PFUser currentUser] saveInBackground];
@@ -91,7 +101,7 @@
                 NSArray *friendPosts = [friendQuery findObjects];
                 for (NSDictionary *onePost in friendPosts) {
                     NSLog(@"%@", [onePost objectForKey:@"text"]);
-                    [self.posts addObject:[onePost objectForKey:@"text"]];
+                    [self.posts addObject:[NSMutableArray arrayWithObjects:[onePost objectForKey:@"text"], [onePost objectForKey:@"postedAboutID"], nil]];
                 }
                 
                 //Reload table so it all shows up
@@ -106,7 +116,9 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
+    
+    //Saving the userInfo to persistent storage
+    [userInfo synchronize];
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,9 +144,15 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
+    NSMutableArray *blah = [[self.posts objectAtIndex:indexPath.row] mutableCopy];
+    
+    NSString *MyURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square", [blah objectAtIndex:1]];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:MyURL]]];
+    
     // Set up the cell...
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
-    cell.textLabel.text = [self.posts objectAtIndex:indexPath.row];
+    //cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
+    [cell.imageView setImage:image];
+    cell.textLabel.text = [blah objectAtIndex:0];
     
     return cell;
 }

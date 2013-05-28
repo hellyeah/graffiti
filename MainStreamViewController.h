@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MainStreamViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UINavigationBar *navBar;
