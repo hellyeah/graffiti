@@ -11,7 +11,6 @@
 
 @interface PostViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UITextField *facebookID;
 @property (strong, nonatomic) IBOutlet UITextView *friendText;
 - (IBAction)postButtonTouchHandler:(id)sender;
 

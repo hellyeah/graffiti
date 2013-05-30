@@ -34,7 +34,6 @@
     //[self.tableViewController setTableViewController:[self tableView]]
     //[self.view addSubview:tableViewController.tableView];
     self.posts = [NSMutableArray array];
-    NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
     
     
     //Just another example of nsmutablearray being implemented
@@ -48,6 +47,7 @@
            NSError *error) {
              if (!error) {
                  NSLog(@"Workin");
+                 NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
                  NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:5];
                  
                  userProfile[@"facebookId"] = user.id;
@@ -59,6 +59,11 @@
                  //userProfile[@"relationship"] = userData[@"relationship_status"];
                  NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", user.id]];
                  userProfile[@"pictureURL"] = [pictureURL absoluteString];
+                 
+                 NSMutableArray *myData = [NSMutableArray arrayWithObjects:user.id, user.name, nil];
+                 
+                 [userInfo setObject:myData forKey:@"myData"];
+                 [userInfo synchronize];
                  
                  [[PFUser currentUser] setObject:userProfile forKey:@"profile"];
                  [[PFUser currentUser] saveInBackground];
@@ -82,6 +87,7 @@
                     [facebookFriends addObject:[NSMutableArray arrayWithObjects:[friendObject objectForKey:@"id"],[friendObject objectForKey:@"name"],nil]];
                     //[userInfo setObject:friendObject forKey:@"friend"];
                 }
+                NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
                 [userInfo setObject:facebookFriends forKey:@"friendData"];
                 //Saving the userInfo to persistent storage
                 [userInfo synchronize];
@@ -118,7 +124,6 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     //Saving the userInfo to persistent storage
-    [userInfo synchronize];
 }
 
 - (void)didReceiveMemoryWarning
@@ -147,11 +152,11 @@
     NSMutableArray *blah = [[self.posts objectAtIndex:indexPath.row] mutableCopy];
     
     NSString *MyURL = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square", [blah objectAtIndex:1]];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:MyURL]]];
+    //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:MyURL]]];
     
     // Set up the cell...
     //cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
-    [cell.imageView setImage:image];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:MyURL] placeholderImage:[UIImage imageNamed:@"loading.png"]];
     cell.textLabel.text = [blah objectAtIndex:0];
     
     return cell;

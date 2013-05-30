@@ -46,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmw-hv-ceE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="28" y="-118"/>
+            <point key="canvasLocation" x="-148" y="-118"/>
         </scene>
         <!--Main Stream View Controller-->
         <scene sceneID="epf-as-ORB">
@@ -100,11 +100,41 @@
                     <connections>
                         <outlet property="navBar" destination="cHA-Yh-lnS" id="tHL-kL-FL1"/>
                         <outlet property="tableView" destination="zjR-rp-0eP" id="wH1-gL-7YQ"/>
+                        <segue destination="ncx-wZ-yLH" kind="modal" id="6Qu-7n-VKo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKA-Da-Oi5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="681" y="-118"/>
+        </scene>
+        <!--View Controller - FriendStreamViewController-->
+        <scene sceneID="cXS-7i-9NA">
+            <objects>
+                <viewController title="FriendStreamViewController" id="ncx-wZ-yLH" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WKJ-td-mDc">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Jg-6F-MTU">
+                                <items>
+                                    <navigationItem title="Title" id="AHf-Nd-wwx"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0Jg-6F-MTU" firstAttribute="leading" secondItem="WKJ-td-mDc" secondAttribute="leading" type="default" id="4pg-KN-0TA"/>
+                            <constraint firstItem="0Jg-6F-MTU" firstAttribute="top" secondItem="WKJ-td-mDc" secondAttribute="top" type="default" id="JYE-ol-deS"/>
+                            <constraint firstItem="0Jg-6F-MTU" firstAttribute="trailing" secondItem="WKJ-td-mDc" secondAttribute="trailing" type="default" id="kRd-4Q-K7k"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="gKb-6g-xCU" kind="modal" id="J3t-zY-AMu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ADw-j1-TsM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1137" y="841"/>
         </scene>
         <!--Friend Picker View Controller-->
         <scene sceneID="g8z-0g-Esa">
@@ -116,15 +146,15 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rOq-LD-KxP">
                                 <items>
-                                    <navigationItem title="Select a friend" id="m44-Hy-ucK"/>
+                                    <navigationItem title="Select a friend" id="m44-Hy-ucK">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="n3x-Vn-b7o">
+                                            <connections>
+                                                <segue destination="BFh-QC-SxW" kind="modal" identifier="backToMainStream" id="94x-Tg-ARI"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
-                            <searchBar contentMode="redraw" placeholder="Search your friends" translatesAutoresizingMaskIntoConstraints="NO" id="smj-Cs-jXP">
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="gKb-6g-xCU" id="agw-Ks-UcK"/>
-                                </connections>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xdS-lC-MK0">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -136,9 +166,6 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <connections>
-                                            <segue destination="zvN-in-T4h" kind="modal" identifier="toPostView" id="GWe-rw-qQr"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -146,29 +173,36 @@
                                     <outlet property="delegate" destination="gKb-6g-xCU" id="dTl-Si-t5L"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Tew-JY-ayW">
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="gKb-6g-xCU" id="qy4-qu-8mS"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="xdS-lC-MK0" firstAttribute="bottom" secondItem="EoA-BJ-U77" secondAttribute="bottom" type="default" id="38D-3S-eRC"/>
-                            <constraint firstItem="xdS-lC-MK0" firstAttribute="top" secondItem="smj-Cs-jXP" secondAttribute="bottom" type="default" id="CFr-5H-jWK"/>
-                            <constraint firstItem="smj-Cs-jXP" firstAttribute="trailing" secondItem="EoA-BJ-U77" secondAttribute="trailing" type="default" id="Od5-Sz-cyq"/>
+                            <constraint firstItem="Tew-JY-ayW" firstAttribute="trailing" secondItem="EoA-BJ-U77" secondAttribute="trailing" type="default" id="AbV-i8-XYn"/>
+                            <constraint firstItem="Tew-JY-ayW" firstAttribute="leading" secondItem="EoA-BJ-U77" secondAttribute="leading" type="default" id="TEj-ui-sIa"/>
                             <constraint firstItem="rOq-LD-KxP" firstAttribute="trailing" secondItem="EoA-BJ-U77" secondAttribute="trailing" type="default" id="WzU-HY-Oeu"/>
                             <constraint firstItem="xdS-lC-MK0" firstAttribute="trailing" secondItem="EoA-BJ-U77" secondAttribute="trailing" type="default" id="bLx-i3-O1W"/>
+                            <constraint firstItem="Tew-JY-ayW" firstAttribute="bottom" secondItem="xdS-lC-MK0" secondAttribute="top" type="default" id="cP6-Cf-eYu"/>
                             <constraint firstItem="rOq-LD-KxP" firstAttribute="leading" secondItem="EoA-BJ-U77" secondAttribute="leading" type="default" id="g5j-Ue-gfB"/>
-                            <constraint firstItem="smj-Cs-jXP" firstAttribute="leading" secondItem="EoA-BJ-U77" secondAttribute="leading" type="default" id="qZB-PJ-EoU"/>
+                            <constraint firstItem="Tew-JY-ayW" firstAttribute="top" secondItem="rOq-LD-KxP" secondAttribute="bottom" type="default" id="hoG-mY-db5"/>
                             <constraint firstItem="rOq-LD-KxP" firstAttribute="top" secondItem="EoA-BJ-U77" secondAttribute="top" type="default" id="rQ2-gf-Jbk"/>
                             <constraint firstItem="xdS-lC-MK0" firstAttribute="leading" secondItem="EoA-BJ-U77" secondAttribute="leading" type="default" id="vH9-bS-gB4"/>
-                            <constraint firstItem="smj-Cs-jXP" firstAttribute="top" secondItem="rOq-LD-KxP" secondAttribute="bottom" type="default" id="yjL-eE-fs0"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="searchBar" destination="smj-Cs-jXP" id="aFG-1V-Q5U"/>
+                        <outlet property="searchBar" destination="Tew-JY-ayW" id="bkW-qd-mge"/>
                         <outlet property="tableView" destination="xdS-lC-MK0" id="fuC-x9-fAn"/>
+                        <segue destination="zvN-in-T4h" kind="modal" identifier="toPostView" id="WzW-01-b8J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Fh-Jg-4M0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1165" y="-176"/>
+            <point key="canvasLocation" x="1573" y="-134"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="nNg-5l-bqP">
@@ -178,13 +212,6 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="facebookID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="49a-DI-d6p">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="145" id="GDS-JV-VCc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What'd your friend say?" translatesAutoresizingMaskIntoConstraints="NO" id="eVu-kr-3gJ">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -197,6 +224,11 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jqt-kb-eaW">
                                 <items>
                                     <navigationItem title="Graffiti" id="Sy4-Ud-iD3">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="SiZ-F2-5HP">
+                                            <connections>
+                                                <segue destination="gKb-6g-xCU" kind="modal" identifier="backToFriendPicker" id="sYv-MP-ZuE"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Post" id="ijq-gL-IJV">
                                             <connections>
                                                 <action selector="postButtonTouchHandler:" destination="zvN-in-T4h" id="5AA-v4-f6a"/>
@@ -208,28 +240,63 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Jqt-kb-eaW" firstAttribute="centerX" secondItem="49a-DI-d6p" secondAttribute="centerX" type="default" id="RW9-D4-viq"/>
-                            <constraint firstItem="eVu-kr-3gJ" firstAttribute="top" secondItem="MQS-Nv-gge" secondAttribute="top" constant="200" id="VhM-rP-UD5"/>
-                            <constraint firstItem="eVu-kr-3gJ" firstAttribute="leading" secondItem="MQS-Nv-gge" secondAttribute="leading" constant="48" id="XgE-NF-iFM"/>
+                            <constraint firstItem="eVu-kr-3gJ" firstAttribute="centerX" secondItem="Jqt-kb-eaW" secondAttribute="centerX" type="default" id="0h2-4N-RTC"/>
                             <constraint firstItem="Jqt-kb-eaW" firstAttribute="leading" secondItem="MQS-Nv-gge" secondAttribute="leading" type="default" id="dEr-5I-Ryf"/>
                             <constraint firstItem="Jqt-kb-eaW" firstAttribute="trailing" secondItem="MQS-Nv-gge" secondAttribute="trailing" type="default" id="f9i-DI-tNV"/>
                             <constraint firstItem="Jqt-kb-eaW" firstAttribute="top" secondItem="MQS-Nv-gge" secondAttribute="top" type="default" id="hJo-6d-4GZ"/>
-                            <constraint firstItem="49a-DI-d6p" firstAttribute="top" secondItem="MQS-Nv-gge" secondAttribute="top" constant="101" id="iay-Fc-nJ5"/>
+                            <constraint firstItem="eVu-kr-3gJ" firstAttribute="top" secondItem="MQS-Nv-gge" secondAttribute="top" constant="111" id="jzi-lN-gIM"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="facebookID" destination="49a-DI-d6p" id="Rtz-Bh-TcA"/>
                         <outlet property="friendText" destination="eVu-kr-3gJ" id="PWg-ny-EvE"/>
+                        <segue destination="BFh-QC-SxW" kind="modal" identifier="afterPost" id="25y-hV-kBG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="igm-lf-LQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1795" y="-118"/>
+            <point key="canvasLocation" x="1067" y="-1172"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="FriendPickerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FriendPickerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginButtonTouchHandler:"/>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+            </relationships>
+        </class>
+        <class className="MainStreamViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainStreamViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="_tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PostViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PostViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="postButtonTouchHandler:"/>
+                <relationship kind="outlet" name="friendText" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="J3t-zY-AMu"/>
+        <segue reference="xuk-hv-1kW"/>
+    </inferredMetricsTieBreakers>
 </document>

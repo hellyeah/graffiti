@@ -17,5 +17,6 @@ UITableViewDelegate> {
 }
 
 @property (nonatomic, strong) NSMutableArray *friends;
+@property (nonatomic, strong) NSMutableArray *searchResults;
 
 @end
